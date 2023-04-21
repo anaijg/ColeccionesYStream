@@ -1,12 +1,21 @@
 package ejercicio02;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Numeros numeros = new Numeros();
 
-        System.out.println("Sus numeros: " + numeros.numerosPositivos());
-        System.out.println("Solo los pares: " + numeros.pares());
-        numeros.rmMultiplos3();
-        System.out.println("Los multiplos de 3 se han eliminado: " + numeros.numerosPositivos());
+        List<Integer> numerosList = new ArrayList<>(numeros.numerosPositivos());
+
+        System.out.println(numerosList);
+
+        List<Integer> numerosListPares = numerosList.stream()
+                .filter(n -> n % 2 == 0)
+                .toList();
+
+        System.out.println(numerosListPares);
     }
 }
