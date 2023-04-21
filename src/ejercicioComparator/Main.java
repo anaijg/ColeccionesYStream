@@ -1,23 +1,24 @@
 package ejercicioComparator;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+
         Socio s1 = new Socio(1, "Pedro", LocalDate.of(2000, 10, 9));
         Socio s2 = new Socio(2, "Cristo", LocalDate.of(2002, 10, 9));
         Socio s3 = new Socio(3, "Judas", LocalDate.of(1990, 10, 9));
 
         ArrayList<Socio> socios = new ArrayList<>();
-        socios.add(s1);
         socios.add(s2);
+        socios.add(s1);
         socios.add(s3);
 
         System.out.println(socios);
+
+
+
 
         /*ComparaFN comparador = new ComparaFN();
 
@@ -57,20 +58,14 @@ public class Main {
     }
 
     public static ArrayList<Socio> ordenar(int opcion, int orden, ArrayList<Socio> socios) {
-        Comparator comparaID = new ComparaNumSocio();
-        Comparator comparaNombre = new ComparaNombre();
-        Comparator comparaFN = new ComparaFN();
+//        Comparator comparaID = new ComparaNumSocio();
+//        Comparator comparaNombre = new ComparaNombre();
+//        Comparator comparaFN = new ComparaFN();
 
         switch (opcion) {
-            case 1 :
-                socios.sort(comparaNombre);
-                break;
-            case 2:
-                socios.sort(comparaID);
-                break;
-            case 3:
-                socios.sort(comparaFN);
-                break;
+            case 1 -> socios.sort(comparaNombre);
+            case 2 -> socios.sort(comparaID);
+            case 3 -> socios.sort(comparaFN);
         }
 
         if (orden == 2) {
@@ -80,4 +75,8 @@ public class Main {
         return socios;
     }
     static Scanner in = new Scanner(System.in);
+
+    static Comparator comparaID = new ComparaNumSocio();
+    static Comparator comparaNombre = new ComparaNombre();
+    static Comparator comparaFN = new ComparaFN();
 }
