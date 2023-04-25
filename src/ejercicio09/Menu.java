@@ -1,13 +1,12 @@
 package ejercicio09;
 
-import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
-    private Agenda agenda;
+public class Menu extends Agenda{
 
-    public Menu(Agenda agenda) {
-        this.agenda = agenda;
+    public Menu() {
+        super();
+
     }
 
     public void iniciar() {
@@ -29,11 +28,11 @@ public class Menu {
     public void opcionesMenu() {
         int opcion = opcion();
         switch (opcion) {
-            case 1 -> agenda.añadirContacto(new Contacto(pedirNombre(), pedirTelefono()));
+            case 1 -> añadirContacto(new Contacto(pedirNombre(), pedirTelefono()));
             case 2 -> System.out.println(buscarContacto());
             case 3 -> editarContacto();
             case 4 -> borrarContacto();
-            case 5 -> System.out.println(agenda);
+            case 5 -> System.out.println(listaContactos());
             case 6 -> System.exit(0);
             default -> System.out.println("Error");
         }
@@ -41,7 +40,7 @@ public class Menu {
 
     private void borrarContacto() {
         Contacto cEliminado = buscarContacto();
-        agenda.eliminar(cEliminado);
+        eliminar(cEliminado);
         System.out.println("Contacto Eliminado");
     }
 
@@ -53,10 +52,10 @@ public class Menu {
 
         if (opcion == 1) {
             cOld.setNombre(pedirNombre());
-            agenda.añadirContacto(cOld);
+            añadirContacto(cOld);
         }else {
-            agenda.eliminar(cOld);
-            agenda.añadirContacto(new Contacto(cOld.nombre(), pedirTelefono()));
+            eliminar(cOld);
+            añadirContacto(new Contacto(cOld.nombre(), pedirTelefono()));
 
         }
     }
@@ -67,38 +66,11 @@ public class Menu {
         int opcion = opcion();
 
         if (opcion == 1) {
-            return agenda.buscarNombre(buscarNombre());
+            return buscarContactoPorNombre(pedirNombre());
         } else {
-            return agenda.buscarTelefono(buscarTelefono());
+            return buscarContactoPorTelefono(pedirTelefono());
         }
 
-    }
-
-    private String buscarNombre() {
-        List<Contacto> contactos = agenda.listar();
-
-        while (true) {
-            String nombre = pedirNombre();
-            for (Contacto c : contactos) {
-                if (c.nombre().equalsIgnoreCase(nombre)) {
-                    return nombre;
-                }
-            }
-            System.out.println("El contacto no existe.");
-        }
-    }
-    private String buscarTelefono() {
-        List<Contacto> contactos = agenda.listar();
-
-        while (true) {
-            String telefono = pedirTelefono();
-            for (Contacto c : contactos) {
-                if (c.telefono().equalsIgnoreCase(telefono)) {
-                    return telefono;
-                }
-            }
-            System.out.println("El contacto no existe.");
-        }
     }
 
     private String pedirNombre() {

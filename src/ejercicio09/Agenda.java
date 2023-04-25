@@ -4,16 +4,15 @@ import java.util.*;
 
 public class Agenda {
     //ATRIBUTOS
-    private HashMap<String, Contacto> contactos;
+    protected HashMap<String, Contacto> contactos;
 
     //CONSTRUCTOR
     public Agenda() {
         contactos = new HashMap<>();
     }
 
-    @Override
-    public String toString() {
-        List<Contacto> contactosOrdenados = listar();
+    public String listaContactos() {
+        List<Contacto> contactosOrdenados = ordenarPorNombre();
         StringBuilder sb = new StringBuilder("Contactos: \n");
         contactosOrdenados.forEach(contacto -> sb.append(contacto.nombre()).append(": ")
                 .append(contacto.telefono())
@@ -22,19 +21,24 @@ public class Agenda {
     }
 
     //FUNCIONES
-    public Contacto buscarTelefono(String telefono) {
-        return contactos.get(telefono);
+    public Contacto buscarContactoPorTelefono(String telefono) {
+        if (contactos.containsKey(telefono)) {
+            return contactos.get(telefono);
+        } else {
+            System.out.println("El contacto no existe");
+            return null;
+        }
     }
-    public Contacto buscarNombre(String nombre) {
-        for (Contacto c : contactos.values()) {
-            if (c.nombre().equalsIgnoreCase(nombre)) {
-                return c;
+    public Contacto buscarContactoPorNombre(String nombre) {
+        for (Map.Entry<String, Contacto> mapa : contactos.entrySet()) {
+            if (mapa.getValue().nombre().equalsIgnoreCase(nombre)) {
+                return mapa.getValue();
             }
         }
-        System.out.println("Contacto invalido");
+        System.out.println("El contacto no existe");
         return null;
     }
-    public List<Contacto> listar() {
+    private List<Contacto> ordenarPorNombre() {
         List<Contacto> contactoList = new ArrayList<>(contactos.values());
         contactoList.sort(Comparator.comparing(Contacto::nombre));
         return contactoList;
