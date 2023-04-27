@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ColeccionesYStream.iml" filepath="$PROJECT_DIR$/ColeccionesYStream.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Excepciones/Excepciones.iml" filepath="$PROJECT_DIR$/Excepciones/Excepciones.iml" />
     </modules>
   </component>
 </project>
